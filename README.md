@@ -1,7 +1,7 @@
 # Job Manager
 Technical test created for Web Atrio. 
 
-## Contexte
+## Context
 
 Develop a web application for managing employment records for individuals. Ensure to expose an API to address various requirements:
 
