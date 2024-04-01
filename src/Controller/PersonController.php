@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PersonRepository;
+use App\Service\PersonService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,5 +42,31 @@ class PersonController extends AbstractController
         $entityManager->flush();
 
         return new Response('Personne enregistrée avec succès', Response::HTTP_CREATED);
+    }
+
+    #[Route('/api/people', name: 'get_people', methods: ['GET'])]
+    public function getAll(
+        PersonRepository $personRepository,
+        PersonService $personService,
+        Request $request, 
+        EntityManagerInterface $entityManager): Response
+    {
+        $people = $personRepository->findBy([], ['lastname' => 'ASC', 'firstname' => 'ASC']);
+
+        foreach ($people as $person) {
+            $age = $personService->calculateAge($person->getBirthdate());
+
+            $personDatas = [
+                'id'       => $person->getId(),
+                'lastname' => $person->getLastname(),
+                'prenom'   => $person->getFirstname(),
+                'age'      => $age,
+                'jobs'     => $person->getJobs(),
+            ];
+
+            $datas[] = $personDatas;
+        }
+
+        return $this->json($datas);
     }
 }
