@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: JobRepository::class)]
 class Job
 {
+    public const FORMAT_DATES = 'Y-m-d';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
