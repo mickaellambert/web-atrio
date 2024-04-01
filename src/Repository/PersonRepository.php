@@ -20,4 +20,10 @@ class PersonRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Person::class);
     }
+
+    public function getByCompany(string $company) 
+    {
+        // TODO : Créer une requête personnalisée 
+        // Je n'ai plus le temps d'écrire, je dois envoyer le mail, désolé :'(
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PersonRepository;
+use App\Repository\WorkRepository;
 use App\Service\PersonService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,5 +69,13 @@ class PersonController extends AbstractController
         }
 
         return $this->json($datas);
+    }
+
+    #[Route('/api/people/work/{company}', name: 'get_people_by_company', methods: ['GET'])]
+    public function getAllByCompany(string $company): Response
+    {
+        // TODO : La prochaine fois, passer moins de temps sur la configuration du projet
+
+        return $this->json([]);
     }
 }
