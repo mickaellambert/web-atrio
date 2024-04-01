@@ -49,7 +49,7 @@ class JobController extends AbstractController
             return new Response('La date de début est obligatoire', Response::HTTP_BAD_REQUEST);
         }
 
-        $beganAt = \DateTime::createFromFormat('Y-m-d', $data['began_at']);
+        $beganAt = \DateTime::createFromFormat(Job::FORMAT_DATES, $data['began_at']);
 
         if (!$beganAt) {
             return new Response('La date de début doit être au format YYYY-MM-DD', Response::HTTP_BAD_REQUEST);

@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
 class Person
 {
+    public const MAX_AGE = 150;
+    public const FORMAT_BIRTHDATE = 'Y-m-d';
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

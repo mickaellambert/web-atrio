@@ -23,13 +23,13 @@ class PersonController extends AbstractController
             return new Response('Les champs nom, prénom et date de naissance sont obligatoires', Response::HTTP_BAD_REQUEST);
         }
 
-        $birthdate = \DateTime::createFromFormat('Y-m-d', $data['birthdate']);
+        $birthdate = \DateTime::createFromFormat(Person::FORMAT_BIRTHDATE, $data['birthdate']);
         
         if (!$birthdate) {
             return new Response('La date de naissance doit être au format YYYY-MM-DD', Response::HTTP_BAD_REQUEST);
         }
 
-        if ($birthdate->diff(new \DateTime())->y >= 150) {
+        if ($birthdate->diff(new \DateTime())->y >= Person::MAX_AGE) {
             return new Response('L\'âge maximum autorisé est de 150 ans', Response::HTTP_BAD_REQUEST);
         }
 
